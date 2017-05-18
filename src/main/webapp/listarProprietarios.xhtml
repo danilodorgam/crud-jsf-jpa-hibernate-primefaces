@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+
+<h:head>
+
+</h:head>
+<h:body>
+	<h:form id="form">
+
+		<p:dataTable var="proprietario" value="#{proprietarioBean.listar()}" styleClass="table table-striped"  rows="10"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+			<p:column headerText="Nome">
+				<h:outputText value="#{proprietario.nome}" />
+			</p:column>
+			<p:column headerText="CFP">
+				<h:outputText value="#{proprietario.cpfProprietario}" />
+			</p:column>
+			<p:column headerText="Data de Nascimento">
+				<h:outputText value="#{proprietario.dataNascimento.toString()}" />
+			</p:column>
+			<p:column headerText="Ações">
+				<p:commandButton value="Detalhes" icon="fa fa-fw fa-remove"
+					type="submmit" oncomplete="PF('dlg').show()" update="form"
+					styleClass="ui-icon ui-icon-search">
+					<f:setPropertyActionListener value="#{proprietario}"
+						target="#{proprietarioBean.proprietario}" />
+				</p:commandButton>
+				<p:commandButton value="Deletar" icon="fa fa-fw fa-remove"
+					type="submmit" action="#{proprietarioBean.deletar(proprietario)}"
+					update="form" styleClass="ui-icon ui-icon-circle-close
+ 
+ " />
+ 				<!-- icon="fa fa-fw fa-remove" -->
+				<p:commandButton value="Atualizar" 
+					type="submmit" action="#{proprietarioBean.editar(proprietario)}"
+					update="form" styleClass="ui-icon ui-icon-locked
+  
+ 
+ " >
+ 	<f:setPropertyActionListener target="#{proprietarioBean.proprietario}" value="#{proprietario}"/>
+ </p:commandButton>
+
+			</p:column>
+
+
+
+		</p:dataTable>
+		<p:commandButton value="Cadastrar" icon="fa fa-fw fa-remove"
+				 action="inserirProprietario?faces-redirect=true" />
+		<p:dialog widgetVar="dlg" var="olo" modal="true" resizable="false"
+			header="Detalhes" showEffect="fade">
+			<p:panelGrid id="display" columns="2" columnClasses="label,value">
+				<h:outputText value="CPF: " />
+				<h:outputText id="cpfValue"
+					value="#{proprietarioBean.proprietario.cpfProprietario}" />
+
+				<h:outputText value="Nome:" />
+				<h:outputText id="nomeValue"
+					value="#{proprietarioBean.proprietario.nome}" />
+
+				<h:outputText value="Endereço: " />
+				<h:outputText id="enderecoValue"
+					value="#{proprietarioBean.proprietario.endereco}" />
+
+				<h:outputText value="Bairro: " />
+				<h:outputText id="bairroValue"
+					value="#{proprietarioBean.proprietario.bairro}" />
+
+				<h:outputText value="Cidade: " />
+				<h:outputText id="cidadeValue"
+					value="#{proprietarioBean.proprietario.cidade}" />
+
+				<h:outputText value="UF: " />
+				<h:outputText id="ufValue"
+					value="#{proprietarioBean.proprietario.uf}" />
+				<h:outputText value="Sexo: " />
+				<h:outputText id="sexoValue"
+					value="#{proprietarioBean.proprietario.sexo}" />
+
+				<h:outputText value="Data Nascimento: " />
+				<h:outputText id="dataValue"
+					value="#{proprietarioBean.proprietario.dataNascimento}" />
+
+
+			</p:panelGrid>
+		</p:dialog>
+	</h:form>
+</h:body>
+</html>

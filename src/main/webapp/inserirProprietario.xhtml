@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+	<h:messages />
+	<h:form>
+
+		<h:panelGrid columns="2" cellpadding="5">
+
+			<p:outputLabel for="cpf" value="CPF:" />
+			<p:inputText id="cpf"
+				value="#{proprietarioBean.proprietario.cpfProprietario}" />
+
+			<p:outputLabel for="nome" value="Nome:" />
+			<p:inputText id="nome" value="#{proprietarioBean.proprietario.nome}" />
+
+			<p:outputLabel for="endereco" value="Endereço:" />
+			<p:inputText id="endereco"
+				value="#{proprietarioBean.proprietario.endereco}" />
+
+			<p:outputLabel for="bairro" value="Bairro:" />
+			<p:inputText id="bairro"
+				value="#{proprietarioBean.proprietario.bairro}" />
+
+			<p:outputLabel for="cidade" value="Cidade: " />
+			<p:inputText id="cidade"
+				value="#{proprietarioBean.proprietario.cidade}" />
+
+			<p:outputLabel for="uf" value="UF: " />
+			<p:inputText id="uf" value="#{proprietarioBean.proprietario.uf}" />
+
+			<p:outputLabel for="sexo" value="Sexo: " />
+			<p:inputText id="sexo" value="#{proprietarioBean.proprietario.sexo}" />
+
+			<p:outputLabel for="date" value="Data Nascimento: " />
+			<p:calendar id="date"
+				value="#{proprietarioBean.proprietario.dataNascimento}" />
+
+
+
+	<!-- immediate  == desativa a validação do primefaces -->
+		<p:commandButton value="Enviar" update="display"
+				action="#{proprietarioBean.criar}" oncomplete="PF('dlg').show()"
+				process="@form" type="submmit" immediate="true" />
+		</h:panelGrid>
+		<p:panel id="panel" header="Telefones" style="margin-bottom:10px;">
+			<p:messages id="messages" />
+
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:outputLabel for="ddd" value="DDD: *" />
+				<p:inputText id="ddd" value="#{proprietarioBean.telefone.ddd}" required="true"
+					label="Text 1">
+					<f:validateLength minimum="2" />
+				</p:inputText>
+
+				<h:outputLabel for="numero" value="Numero: *" />
+				<p:inputText id="numero" value="#{proprietarioBean.telefone.numero}" required="true"
+					label="Text 2" />
+
+
+				<p:outputLabel value="Tipo do Telefone: " />
+			    <h:selectOneMenu value="#{proprietarioBean.telefone.tipoTelefone}">
+				<f:selectItems value="#{proprietarioBean.listarTipoTelefone()}"
+					var="tipo" itemValue="#{tipo.idTipoTelefone}"
+					itemLabel="#{tipo.descricaoTipoTelefone}" />
+			   </h:selectOneMenu>
+				
+			</h:panelGrid>
+					<p:dataTable var="_telefone" value="#{proprietarioBean.telefones}" styleClass="table table-striped" >
+			<p:column headerText="DDD">
+				<h:outputText value="#{_telefone.ddd}" />
+			</p:column>
+			<p:column headerText="numero">
+				<h:outputText value="#{_telefone.numero}" />
+			</p:column>
+
+
+
+
+
+		</p:dataTable>
+			<p:commandButton update="@(form)" value="Adicionar Número"  action="#{proprietarioBean.insereTelefones(telefone)}"/>
+		</p:panel>
+					
+
+		<p:dialog widgetVar="dlg" modal="true" resizable="false"
+			header="Dados salvos com Sucesso" showEffect="fade">
+			<p:panelGrid id="display" columns="2" columnClasses="label,value">
+				<h:outputText value="CPF: " />
+				<h:outputText id="cpfValue"
+					value="#{proprietarioBean.proprietario.cpfProprietario}" />
+
+				<h:outputText value="Nome:" />
+				<h:outputText id="nomeValue"
+					value="#{proprietarioBean.proprietario.nome}" />
+
+				<h:outputText value="Endereço: " />
+				<h:outputText id="enderecoValue"
+					value="#{proprietarioBean.proprietario.endereco}" />
+
+				<h:outputText value="Bairro: " />
+				<h:outputText id="bairroValue"
+					value="#{proprietarioBean.proprietario.bairro}" />
+
+				<h:outputText value="Cidade: " />
+				<h:outputText id="cidadeValue"
+					value="#{proprietarioBean.proprietario.cidade}" />
+
+				<h:outputText value="UF: " />
+				<h:outputText id="ufValue"
+					value="#{proprietarioBean.proprietario.uf}" />
+				<h:outputText value="Sexo: " />
+				<h:outputText id="sexoValue"
+					value="#{proprietarioBean.proprietario.sexo}" />
+
+				<h:outputText value="Data Nascimento: " />
+				<h:outputText id="dataValue"
+					value="#{proprietarioBean.proprietario.dataNascimento}" />
+
+
+			</p:panelGrid>
+			<p:commandButton value="Ver Cadastrados" icon="fa fa-fw fa-remove"
+				type="submmit" action="listarProprietarios?faces-redirect=true" />
+		</p:dialog>
+	</h:form>
+</h:body>
+</html>
