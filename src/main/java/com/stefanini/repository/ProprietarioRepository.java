@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.stefanini.model.Denunciante;
+
 import com.stefanini.model.Proprietario;
 import com.stefanini.util.EntityManagerProducer;
 

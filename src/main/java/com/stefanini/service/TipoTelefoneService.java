@@ -10,7 +10,7 @@ import javax.inject.Inject;
 
 import com.stefanini.model.Proprietario;
 import com.stefanini.model.TipoTelefone;
-import com.stefanini.repository.ProprietarioRepository;
+
 import com.stefanini.repository.TipoTelefoneRepository;
 
 @Stateless

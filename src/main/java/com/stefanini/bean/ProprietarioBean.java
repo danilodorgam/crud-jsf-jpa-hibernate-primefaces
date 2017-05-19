@@ -79,7 +79,7 @@ public class ProprietarioBean implements Serializable {
 	public String editar(Proprietario proprietario) {
 
 		setProprietario(proprietario);
-		//setTelefones(telefoneService.buscar(getProprietario()));
+		setTelefones(telefoneService.buscar(getProprietario()));
 		if(getTelefone() != null){
 			getTelefone().setProprietario(getProprietario());
 			List<Telefone> fones = new ArrayList<Telefone>();

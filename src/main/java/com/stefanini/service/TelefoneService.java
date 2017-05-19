@@ -10,7 +10,7 @@ import javax.inject.Inject;
 
 import com.stefanini.model.Proprietario;
 import com.stefanini.model.Telefone;
-import com.stefanini.repository.ProprietarioRepository;
+
 import com.stefanini.repository.TelefoneRepository;
 
 @Stateless
@@ -20,7 +20,7 @@ public class TelefoneService implements Serializable {
 
 	
 	// BUSCAR
-	public Telefone buscar(Proprietario proprietario){
+	public List<Telefone> buscar(Proprietario proprietario){
 		return telefoneRepository.buscar(proprietario);
 	}
 
