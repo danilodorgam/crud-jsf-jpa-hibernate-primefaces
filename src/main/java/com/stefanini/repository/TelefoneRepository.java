@@ -21,8 +21,7 @@ public class TelefoneRepository implements Serializable {
 
 	
 	public List<Telefone> buscar(Proprietario proprietario) {
-		//return this.manager.find(Telefone.class, proprietario.getCpfProprietario());
-		return this.manager.createQuery("Select p from Telefone p WHERE  in :cpfProprietario").setParameter("cpfProprietario",proprietario.getCpfProprietario()).getResultList();
+		return this.manager.createQuery("select e from Telefone e where e.cpfProprietario = :cpfProprietario").setParameter("cpfProprietario", proprietario.getCpfProprietario()).getResultList();
 
 	}
 
